@@ -26,6 +26,16 @@ model Passenger {
   createdAt          DateTime @default(now())
 
   rides              Ride[]
+  password           Password? 
+}
+
+model Password{
+  id               Int       @id @default(autoincrement())
+  hashedPassword   String
+  passengerId      Int       @unique
+
+  passenger        Passenger @relation(fields: [passengerId], references:[id], onDelete: Cascade)
+
 }
 
 model Driver {
