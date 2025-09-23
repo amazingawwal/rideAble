@@ -1,3 +1,4 @@
 {
-  "$schema": "./node_modules/nx/schemas/nx-schema.json"
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "nxCloudId": "68d1cf09a3a2834ccc7c59b0"
 }
