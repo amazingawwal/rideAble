@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "../../dist/prisma",
+    "rootDir": "../.."  // <-- covers both prisma and backend src
+  },
+  "include": [
+    "**/*.ts",                     // includes prisma folder
+    "../src/assets/utils/auth/**/*.ts"  // includes backend utils needed for seed
+  ]
+}

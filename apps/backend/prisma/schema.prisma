@@ -17,11 +17,11 @@ datasource db {
 
 
 model Passenger {
-  id                 Int      @id @default(autoincrement())
+  id                 String      @id @default(cuid())
   name               String
   phone              String
   email              String   @unique
-  disabilityType     String?
+  disabilityType     DisabilityType
   accessibilityNeeds String?
   createdAt          DateTime @default(now())
 
@@ -30,16 +30,16 @@ model Passenger {
 }
 
 model Password{
-  id               Int       @id @default(autoincrement())
+  id               String       @id @default(cuid())
   hashedPassword   String
-  passengerId      Int       @unique
+  passengerId      String       @unique
 
   passenger        Passenger @relation(fields: [passengerId], references:[id], onDelete: Cascade)
 
 }
 
 model Driver {
-  id            Int      @id @default(autoincrement())
+  id            String      @id @default(cuid())
   name          String
   phone         String
   email         String   @unique
@@ -54,8 +54,8 @@ model Driver {
 
 
 model Vehicle {
-  id                   Int      @id @default(autoincrement())
-  driverId             Int
+  id                   String      @id @default(cuid())
+  driverId             String
   plateNumber          String
   type                 VehicleType    
   accessibilityFeatures String?
@@ -70,10 +70,10 @@ model Vehicle {
 
 
 model Ride {
-  id              Int      @id @default(autoincrement())
-  passengerId     Int
-  driverId        Int
-  vehicleId       Int
+  id              String      @id @default(cuid())
+  passengerId     String
+  driverId        String
+  vehicleId       String
   pickupLocation  String
   dropoffLocation String
   type            RideType   
@@ -90,9 +90,9 @@ model Ride {
 
 
 model Payment {
-  id        Int      @id @default(autoincrement())
-  rideId    Int      @unique
-  donorId   Int?
+  id        String      @id @default(cuid())
+  rideId    String      @unique
+  donorId   String?
   amount    Decimal  @db.Decimal(10,2)
   method    PaymentMethod   
   status    PaymentStatus   
@@ -104,7 +104,7 @@ model Payment {
 
 
 model Donor {
-  id               Int      @id @default(autoincrement())
+  id               String      @id @default(cuid())
   name             String
   type             DonorType  
   contactEmail     String?
@@ -117,11 +117,17 @@ model Donor {
 
 
 model Admin {
-  id        Int      @id @default(autoincrement())
+  id        String      @id @default(cuid())
   name      String
   email     String   @unique
   role      AdminRole  
   createdAt DateTime @default(now())
+}
+
+enum DisabilityType{
+  Mobility
+  Sensory
+  Others
 }
 
 
